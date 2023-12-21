@@ -1,0 +1,152 @@
+{% load static %}
+{% include 'header.html' %}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Profil</h4>
+                <h6>Profil utilisateur</h6>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="profile-set">
+                    <div class="profile-head">
+                    </div>
+                    <div class="profile-top">
+                        <div class="profile-content">
+                            <div class="profile-contentimg">
+                                {% if user_info.profile_image %}
+                                    <img src="{{ user_info.profile_image.url }}" alt="img" id="blah">
+                                {% else %}
+                                    <a href="javascript:void(0);" class="product-img">
+                                        <img src="{% static 'img/profiles/profile3.jpg' %}" alt="default-profile">
+                                    </a>
+                                {% endif %}
+                                <div class="profileupload">
+                                    <input type="file" id="imgInp">
+                                </div>
+                            </div>
+                            
+                            <div class="profile-contentname">
+                                <h2>{{ user_info.nom_complet }}</h2>
+                                <h4>Votre profil personnel.</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Fonction</label>
+                            <input type="text" placeholder="{{ user_info.fonction }}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Nom complet</label>
+                            <input type="text" placeholder="{{ user_info.nom_complet }}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" placeholder="{{ user_info.email }}" readonly>
+                        </div>
+                    </div>
+
+                </div>
+                <br><br>
+                <!-- templates/profile.html -->
+                <form method="post" action="{% url 'password_change' %}">
+                    {% csrf_token %}
+
+
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <label for="id_old_password">Ancien mot de passe</label>
+                            <input placeholder="Entrez votre ancien mot de passe" required type="password" name="old_password" id="id_old_password" class="form-control">
+                        </div>
+                       
+                      
+                    </div>
+
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <label for="id_new_password1">Nouveau mot de passe</label>
+                            <input placeholder="Entrez votre nouveau mot de passe" required type="password" name="new_password1" id="id_new_password1" class="form-control">
+                        </div>
+                      
+                    </div>
+
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <label for="id_new_password2">Confirmer Mot de passe</label>
+                            <input placeholder="Entrez votre nouveau mot de passe" required type="password" name="new_password2" id="id_new_password2" class="form-control">
+                        </div>
+                       
+                    </div>
+
+                    <div class="col-lg-4 col-sm-12">
+                        {% if form.old_password.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {% for error in form.old_password.errors %}
+                            {{ error }}
+                            {% endfor %}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endif %}
+                        {% if form.new_password2.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {% for error in form.new_password2.errors %}
+                            {{ error }}
+                            {% endfor %}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endif %}
+                        {% if form.new_password1.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {% for error in form.new_password1.errors %}
+                            {{ error }}
+                            {% endfor %}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endif %}
+                       
+                    </div>
+                   
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-submit me-2">Soumettre</button>
+                        <a href="{% url 'index' %}" class="btn btn-cancel">Annuler</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+
+<script src="{% static 'js/feather.min.js' %}"></script>
+
+<script src="{% static 'js/jquery.slimscroll.min.js' %}"></script>
+
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<script src="{% static 'plugins/apexchart/apexcharts.min.js' %}"></script>
+<script src="{% static 'plugins/apexchart/chart-data.js' %}"></script>
+
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

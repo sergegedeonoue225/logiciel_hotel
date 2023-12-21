@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résultats de la recherche</title>
+</head>
+<body>
+    <h1>Résultats de la recherche</h1>
+
+    <h2>Véhicules</h2>
+    <table>
+        <tr>
+            <th>Nom du Véhicule</th>
+            <th>N° Châssis</th>
+            <th>Immatriculation</th>
+        </tr>
+        {% for vehicule in vehicules %}
+        <tr>
+            <td>{{ vehicule.nom_vehicule }}</td>
+            <td>{{ vehicule.numero_chassis }}</td>
+            <td>{{ vehicule.immatriculation }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Chauffeurs</h2>
+    <table>
+        <tr>
+            <th>Nom et Prénom du conducteur titulaire</th>
+            <th>Numéro CNI</th>
+            <th>Numéro de permis de conduire</th>
+            <th>Contact du conducteur titulaire</th>
+            <th>Lieu d'habitation</th>
+        </tr>
+        {% for chauffeur in chauffeurs %}
+        <tr>
+            <td>{{ chauffeur.nom_prenom_conducteur_titulaire }}</td>
+            <td>{{ chauffeur.numero_cni }}</td>
+            <td>{{ chauffeur.numero_permis_conduire }}</td>
+            <td>{{ chauffeur.contact_conducteur_titulaire }}</td>
+            <td>{{ chauffeur.lieu_habitation }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Évaluations de Chauffeurs</h2>
+    <table>
+        <tr>
+            <th>Chauffeur</th>
+            <th>Date d'Évaluation</th>
+            <th>Décision Finale</th>
+        </tr>
+        {% for evaluation in evaluations %}
+        <tr>
+            <td>{{ evaluation.chauffeur.nom_prenom_conducteur_titulaire }}</td>
+            <td>{{ evaluation.date_evaluation }}</td>
+            <td>{{ evaluation.decision_finale }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

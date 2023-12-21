@@ -1,0 +1,133 @@
+{% load static %}
+{% include 'header.html' %}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Toutes les notifications</h4>
+                <h6>Consultez tous vos abonnements</h6>
+            </div>
+        </div>
+        <div class="activity">
+            <div class="activity-box">
+                <ul class="activity-list">
+            
+                    <!-- Notifications Actives -->
+                    {% if notifications_actives %}
+                    <div style="background-color: rgb(147, 222, 147);" class="alert alert-sucess alert-dismissible fade show" role="alert">
+                        <strong>Notifications ordinaire</strong>
+                        <ul>
+                            {% for notification in notifications_actives %}
+                            <li id="active-notification-{{ notification.pk }}">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Votre {{ notification.nom_notification }} expire le
+                                        {{ notification.date_notification }}
+                                        à {{ notification.heure_notification }}.</span>
+                                    <a href="{% url 'supprimer_notification' notification.pk %}"
+                                        onclick="return confirmDelete('{{ notification.pk }}');">
+                                        <img src="{% static 'img/icons/delete.svg' %}" alt="delete" class="delete-icon">
+                                    </a>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Aucune notification active.</strong>
+                    </div>
+                    {% endif %}
+            
+                    <!-- Notifications Expirées -->
+                    {% if notifications_expirees %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Notifications ordinaire expirées :</strong>
+                        <ul>
+                            {% for notification in notifications_expirees %}
+                            <li id="expired-notification-{{ notification.pk }}">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Votre {{ notification.nom_notification }} a expiré le
+                                        {{ notification.date_notification }} à
+                                        {{ notification.heure_notification }}.</span>
+                                    <a href="{% url 'supprimer_notification' notification.pk %}"
+                                        onclick="return confirmDelete('{{ notification.pk }}');">
+                                        <img src="{% static 'img/icons/delete.svg' %}" alt="delete" class="delete-icon">
+                                    </a>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Aucune notification expirée.</strong>
+                    </div>
+                    {% endif %}
+            
+                </ul>
+
+                
+            
+                <script>
+                    function confirmDelete(notificationId) {
+                        return confirm("Êtes-vous sûr de vouloir supprimer cette notification ?");
+                    }
+            
+                    // Fonction pour masquer la notification après expiration
+                    function hideExpiredNotifications() {
+                        let expiredNotifications = document.querySelectorAll('[id^="expired-notification-"]');
+                        expiredNotifications.forEach(function (notification) {
+                            // Ajoutez votre logique pour masquer les notifications expirées
+                            let expirationDate = new Date(notification.querySelector('span').textContent.split(
+                                'le')[1].trim());
+                            let currentDate = new Date();
+                            // Si la notification a expiré depuis plus de 3 jours, masquez-la
+                            if (currentDate - expirationDate > 3 * 24 * 60 * 60 * 1000) {
+                                notification.style.display = 'none';
+                            }
+                        });
+                    }
+            
+                    // Appelez la fonction pour masquer les notifications expirées lors du chargement de la page
+                    document.addEventListener("DOMContentLoaded", hideExpiredNotifications);
+                </script>
+            
+                <style>
+                    .delete-icon {
+                        width: 20px;
+                        /* Ajustez la taille selon vos besoins */
+                        height: 20px;
+                        cursor: pointer;
+                    }
+                </style>
+            
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+
+<script src="{% static 'js/feather.min.js' %}"></script>
+
+<script src="{% static 'js/jquery.slimscroll.min.js' %}"></script>
+
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<script src="{% static 'plugins/apexchart/apexcharts.min.js' %}"></script>
+<script src="{% static 'plugins/apexchart/chart-data.js' %}"></script>
+
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

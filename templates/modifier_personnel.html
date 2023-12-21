@@ -1,0 +1,163 @@
+{% load static %}
+{% include 'header.html' %}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Modifier un personnel</h4>
+            </div>
+        </div> 
+
+     
+        <div class="card">
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                        <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.nom.id_for_label }}">Nom et Prénom</label>
+                                {{ form.nom_prenom }}
+                            </div>
+                        </div>
+                    
+                 
+                    
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.date_naissance.id_for_label }}">Date de naissance</label>
+                                {{ form.date_naissance }}
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.nationalite.id_for_label }}">Nationalité</label>
+                                {{ form.nationalite }}
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.lieu_naissance.id_for_label }}">Lieu de naissance</label>
+                                {{ form.lieu_naissance }}
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.numero_cni.id_for_label }}">Numéro CNI</label>
+                                {{ form.numero_cni }}
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.genre.id_for_label }}">Genre</label>
+                                {{ form.genre }}
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.poste.id_for_label }}">Poste</label>
+                                {{ form.poste }}
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.date_embauche.id_for_label }}">Date d'embauche</label>
+                                {{ form.date_embauche }}
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.statut.id_for_label }}">Statut</label>
+                                {{ form.statut }}
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.adresse.id_for_label }}">Adresse</label>
+                                {{ form.adresse }}
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.telephone.id_for_label }}">Téléphone</label>
+                                {{ form.telephone }}
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.email.id_for_label }}">E-mail</label>
+                                {{ form.email }}
+                            </div>
+                        </div>
+                
+                                            
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.profile_image.id_for_label }}">Image de profil</label>
+                                {{ form.profile_image }}
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.piece_identite_recto.id_for_label }}">Pièce d'identité - Recto</label>
+                                {{ form.piece_identite_recto }}
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.piece_identite_verso.id_for_label }}">Pièce d'identité - Verso</label>
+                                {{ form.piece_identite_verso }}
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-submit me-2">Enregistrer</button>
+                        <a href="{% url 'index' %}" class="btn btn-cancel">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/feather.min.js' %}"></script>
+<script src="{% static 'js/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'plugins/select2/js/select2.min.js' %}"></script>
+<script src="{% static 'js/moment.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
+<script src="{% static 'plugins/sweetalert/sweetalert2.all.min.js' %}"></script>
+<script src="{% static 'plugins/sweetalert/sweetalerts.min.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

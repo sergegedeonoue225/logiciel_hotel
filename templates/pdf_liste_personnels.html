@@ -1,0 +1,168 @@
+﻿{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 1cm;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #header {
+            text-align: center;
+        }
+
+        #header img {
+            width: 200px;
+            height: 200px;
+        }
+
+        #title {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            height: 42px;
+            font-size: 30px;
+        }
+
+        th {
+            color: rgb(0, 0, 0);
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    {% for administratif in personnels %}
+    <div>
+        <div id="header">
+            <img style="width: 120px; height: 80px;" src="data:image/png;base64,{{ logo_base64 }}" alt="Logo">
+            {% if personnels %}
+                {% if personnels.0.profile_image %}
+                    <img style="width: 80px; height: 80px;" src="{{ personnels.0.profile_image.url }}" alt="Profile">
+                {% endif %}
+            {% endif %}
+        </div>
+        <div id="title">
+            <h2>Liste du personnel : {{ administratif.nom_prenom }}, {{ administratif.fonction }}</h2>
+           
+        </div>
+        <div class="table-responsive">
+            <table>
+                <tr>
+                    <th>Matricule</th>
+                    <td>{{ administratif.matricule }}</td>
+                </tr>
+                <tr>
+                    <th>Nom et Prénoms</th>
+                    <td>{{ administratif.nom_prenom }}</td>
+                </tr>
+                <tr>
+                    <th>Date de naissance</th>
+                    <td>{{ administratif.date_naissance }}</td>
+                </tr>
+                <tr>
+                    <th>Lieu de naissance</th>
+                    <td>{{ administratif.lieu_naissance }}</td>
+                </tr>
+                <tr>
+                    <th>Nationalité</th>
+                    <td>{{ administratif.nationalite }}</td>
+                </tr>
+                <tr>
+                    <th>Numéro CNI</th>
+                    <td>{{ administratif.numero_cni }}</td>
+                </tr>
+                <tr>
+                    <th>Permis conduire</th>
+                    <td>{{ administratif.numero_permis_conduire }}</td>
+                </tr>
+                <tr>
+                    <th>Lieu d'habitation</th>
+                    <td>{{ administratif.adresse }}</td>
+                </tr>
+                <tr>
+                    <th>Contacts</th>
+                    <td>{{ administratif.contacts }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ administratif.email }}</td>
+                </tr>
+                <tr>
+                    <th>Fonction</th>
+                    <td>{{ administratif.fonction }}</td>
+                </tr>
+                <tr>
+                    <th>Date d'entrée</th>
+                    <td>{{ administratif.date_entree }}</td>
+                </tr>
+                <tr>
+                    <th>Salaire</th>
+                    <td>{{ administratif.salaire | intcomma }} CFA</td>
+                </tr>
+                <tr>
+                    <th>Situation matrimoniale</th>
+                    <td>{{ administratif.sit_matrimoniale }}</td>
+                </tr>
+                <tr>
+                    <th>Nombre d'enfants</th>
+                    <td>{{ administratif.nbe_enft }}</td>
+                </tr>
+                <tr>
+                    <th>Nom du conjoint</th>
+                    <td>{{ administratif.nom_prenom_conjoint }}</td>
+                </tr>
+                <tr>
+                    <th>Profession conjoint</th>
+                    <td>{{ administratif.profession_conjoint }}</td>
+                </tr>
+                <tr>
+                    <th>Contact conjoint</th>
+                    <td>{{ administratif.contact_conjoint }}</td>
+                </tr>
+                <tr>
+                    <th>Nom et Prénoms père</th>
+                    <td>{{ administratif.nom_prenom_pere }}</td>
+                </tr>
+                <tr>
+                    <th>Nom et Prénoms mère</th>
+                    <td>{{ administratif.nom_prenom_mere }}</td>
+                </tr>
+                <tr>
+                    <th>Personne à contacter</th>
+                    <td>{{ administratif.personne_urgence_contact }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+
+</html>    

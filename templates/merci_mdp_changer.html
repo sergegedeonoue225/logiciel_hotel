@@ -1,0 +1,54 @@
+
+{% load static %}
+{% include 'header.html' %}
+
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Profil</h4>
+                <h6>Profil utilisateur</h6>
+            </div>
+        </div>
+
+        <div class="card border-danger rounded-3">
+            <div class="card-body">
+                <div class="text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 0 8 8A8.005 8.005 0 0 0 8 0zm3.68 6.186a.5.5 0 0 1 0 .707l-5 5a.5.5 0 0 1-.707 0l-2-2a.5.5 0 0 1 .707-.707L7 10.793l4.293-4.293a.5.5 0 0 1 .707 0z"/>
+                    </svg>
+                </div>
+        <br>
+                <h5 class="card-title text-center text-success">Mot de passe modifié avec succès !</h5>
+        
+                <div class="text-center">
+                    <a href="{% url 'profile' %}" class="btn btn-danger">Retour en arrière</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+
+    <script src="{% static 'js/feather.min.js' %}"></script>
+
+    <script src="{% static 'js/jquery.slimscroll.min.js' %}"></script>
+
+    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'plugins/apexchart/apexcharts.min.js' %}"></script>
+    <script src="{% static 'plugins/apexchart/chart-data.js' %}"></script>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

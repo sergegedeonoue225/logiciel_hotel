@@ -1,0 +1,270 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="description" content="POS - Modèle d'administration Bootstrap">
+    <meta name="keywords"
+        content="admin, estimations, bootstrap, business, corporate, créatif, gestion, minimal, moderne, html5, réactif">
+    <meta name="author" content="Dreamguys - Modèle d'administration Bootstrap">
+    <meta name="robots" content="noindex, nofollow">
+    <title>GESTHOTEL - LOGICIEL DE GESTION DES HOTELS</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/logo.png' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap4.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome/css/all.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3"></script>
+</head>
+
+<body>
+    <div id="global-loader">
+        <div class="whirly-loader"> </div>
+    </div>
+
+    <div class="main-wrapper">
+
+        <div class="header">
+
+            <div class="header-left active">
+                <a href="{% url 'index' %}" class="logo">
+                    <img style="width: 200px;" src="{% static 'img/logo.png' %}" alt="">
+                </a>
+                <a href="{% url 'index' %}" class="logo-small">
+                    <img src="{% static 'img/logo-small.png' %}" alt="">
+                </a>
+                <a id="toggle_btn" href="javascript:void(0);">
+                </a>
+            </div>
+
+            <a id="mobile_btn" class="mobile_btn" href="#sidebar">
+                <span class="bar-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </a>
+
+            <ul class="nav user-menu">
+                {% if user.fonction.nom_fonction == 'Administrateur' %}
+
+                <li class="nav-item">
+                    <div class="top-nav-user">
+                        <a href="javascript:void(0);" class="responsive-more">
+                        </a>
+                        <div class="top-nav-avatar" style="margin-top: 3px;">
+                            <div class="alert custom-alert alert-dismissible fade show text-left" role="alert"
+                                style="margin-right: 200px; max-width: 100%;">
+                                Bienvenue Mr <strong>{{ user.nom_complet }} - Vous êtes
+                                    {{ user.fonction.nom_fonction }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        .custom-alert {
+                            background-color: #4a8fe8;
+                            color: white;
+                        }
+
+                        .text-left {
+                            text-align: left !important;
+                        }
+                    </style>
+                </li>
+
+          
+                
+                <li class="nav-item dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                        <img src="{% static 'img/icons/notification-bing.svg' %}" alt="img">
+                        <span class="badge rounded-pill">{{ notifications_toutes|length }}</span>
+                    </a>
+                    <div class="dropdown-menu notifications">
+                        <div class="topnav-dropdown-header">
+                            <span class="notification-title">Toutes les notifications</span>
+                        </div>
+                        <div class="noti-content">
+                            <ul class="notification-list">
+                                {% for notification in notifications_toutes %}
+                                <li class="notification-message">
+                                    <a href="{% url 'liste_notifications' %}">
+                                        <div class="media d-flex">
+                                            <span class="avatar flex-shrink-0">
+                                                <img alt="" src="{% static 'img/profiles/profile3.jpg' %}">
+                                            </span>
+                                            <div class="media-body flex-grow-1">
+                                                <p class="noti-details">
+                                                    {% if notification.nom_notification %}
+                                                    <span class="noti-title">{{ notification.nom_notification }} <br>
+                                                        Expiration : le {{ notification.date_notification }} à {{ notification.date_notification }} 
+                                                    </span>
+                                                    {% else %}
+                                                
+                                                    {% endif %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="topnav-dropdown-footer">
+                            <a href="{% url 'liste_notifications' %}">Voir toutes les notifications</a>
+                        </div>
+                    </div>
+                </li>
+
+                {% endif %}
+
+                <li class="nav-item dropdown has-arrow main-drop">
+                    <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
+                        <span class="user-img"><img src="{% static 'img/profiles/profile3.jpg' %}" alt="">
+                            <span class="status online"></span></span>
+                    </a>
+                    <div class="dropdown-menu menu-drop-user">
+                        <div class="profilename">
+                            <div class="profileset">
+                                <span class="user-img"><img src="{% static 'img/profiles/profile3.jpg' %}" alt="">
+                                    <span class="status online"></span></span>
+                                <div class="profilesets">
+                                    <h6>GESTHOTEL</h6>
+                                </div>
+                            </div>
+                            <hr class="m-0">
+                            <a class="dropdown-item" href="{% url 'profile' %}"> <i class="me-2"
+                                    data-feather="user"></i> Mon Profil</a>
+                            <hr class="m-0">
+                            <a class="dropdown-item logout pb-0" href="{% url 'deconnexion' %}"><img
+                                    src="{% static 'img/icons/log-out.svg' %}" class="me-2" alt="img">Déconnexion</a>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+
+            <div class="dropdown mobile-user-menu">
+                <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="{% url 'profile' %}"> <i class="me-2" data-feather="user"></i> Mon
+                        Profil</a>
+                    <hr class="m-0">
+                    <a class="dropdown-item logout pb-0" href="{% url 'deconnexion' %}"><img
+                            src="{% static 'img/icons/log-out.svg' %}" class="me-2" alt="img">Déconnexion</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+
+                        <!------------------------ Admin Section ------------------------------------------>
+                        {% if user.fonction.nom_fonction == 'Administrateur' %}
+
+                        <li class="active">
+                            <a href="{% url 'index' %}"><img style="width: 25px;"
+                                    src="{% static 'img/icons/dashboard.svg' %}" alt="img"><span>
+                                    Tableau de bord</span> </a>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img style="width: 25px;"
+                                    src="{% static 'img/icons/users1.svg' %}" alt="img"><span>
+                                    Utilisateurs</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="{% url 'ajouter_utilisateurs' %}">Ajouter un utilisateur</a></li>
+                                <li><a href="{% url 'listes_utilisateurs' %}">Liste des utilisateurs</a></li>
+
+                            </ul>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img style="width: 25px;"
+                                    src="{% static 'img/icons/userss.svg' %}" alt="img"><span>
+                                    Personnels</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="{% url 'ajouter_personnel' %}">Ajouter un personnel</a></li>
+                                <li><a href="{% url 'liste_personnel' %}">Liste du personnel</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img style="width: 32px;"
+                                    src="{% static 'img/icons/chambre.svg' %}" alt="img"><span>Chambres</span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="{% url 'ajouter_type_chambre' %}">Ajouter un type chambre</a></li>
+                                <li><a href="{% url 'ajouter_chambre' %}">Ajouter une chambre</a></li>
+
+                                <br>
+
+                                <li><a href="{% url 'liste_type_chambres' %}">Liste des types de chambre</a></li>
+                                <li><a href="{% url 'liste_chambres' %}">Liste des chambres</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img style="width: 35px;"
+                                    src="{% static 'img/icons/client.svg' %}" alt="img"><span>Les clients</span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul>
+                        
+                                <li><a href="{% url 'ajouter_client' %}">Ajouter un client</a></li>
+                                <li><a href="{% url 'liste_clients' %}">Liste des clients</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img style="width: 45px;"
+                                    src="{% static 'img/icons/reservation.svg' %}" alt="img"><span>Reservations</span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul>
+                        
+                                <li><a href="{% url 'ajouter_affectation' %}">Reservation de chambre</a></li>
+                                <li><a href="{% url 'liste_affectations' %}">Liste des reservations</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img style="width: 27px;"
+                                    src="{% static 'img/icons//chatchat.svg' %}" alt="img"><span>
+                                    Notifications</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="{% url 'ajouter_notification' %}">Ajouter une notification</a></li>
+                                <li><a href="{% url 'liste_notifications' %}">Liste des notifications</a></li>
+
+                            </ul>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><img style="width: 27px;"
+                                    src="{% static 'img/icons//folder.svg' %}" alt="img"><span>
+                                    Pièces jointes</span> <span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="{% url 'creer_piece_jointe' %}">Ajouter des pièces jointes</a></li>
+                                <li><a href="{% url 'listes_piece_jointe' %}">Liste des pièces jointes</a></li>
+
+                            </ul>
+                        </li>
+
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>

@@ -1,0 +1,216 @@
+{% load static %}
+{% include 'header.html' %}
+{% load humanize %}
+<div class="page-wrapper">
+    <div class="content">
+        {% if user.fonction.nom_fonction == 'Administrateur' %}
+
+        <div class="row">
+
+            {% if notifications_prochaines %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Rappel à venir dans quelques jours :</strong> <br><br>
+                <ul>
+                    {% for notification in notifications_prochaines %}
+                    <li>
+                        Votre <span style="font-weight: bold;">{{ notification.nom_notification }}</span>
+                        expire le {{ notification.date_notification }} à {{ notification.heure_notification }}.
+                    </li>
+                    {% endfor %}
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% else %}
+
+            {% endif %}
+
+            {% if notifications_expirees %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Notifications ordinaire déjà expirées :</strong> <br><br>
+                <ul>
+                    {% for notification in notifications_expirees %}
+                    <li>
+                        Votre <span style="font-weight: bold;">{{ notification.nom_notification }}</span>
+                        a expiré le {{ notification.date_notification }} à {{ notification.heure_notification }}.
+                    </li>
+                    {% endfor %}
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% else %}
+
+            {% endif %}
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-4 col-sm-6 col-12 d-flex">
+                <div class="dash-count">
+                    <div class="dash-counts">
+                        <h4>{{ nb_utilisateurs }}</h4>
+                        <h5 style="font-size: 18px;">Nombre total des utilisateurs</h5>
+                    </div>
+                    <div class="dash-imgs">
+                        <i class='fas fa-user' style='font-size:48px;color:white'></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12 d-flex">
+                <div class="dash-count">
+                    <div class="dash-counts">
+                        <h4>{{ nb_personnels }}</h4>
+                        <h5 style="font-size: 18px;">Nombre total du personnels</h5>
+                    </div>
+                    <div class="dash-imgs">
+                        <i class='fas fa-user-friends' style='font-size:48px;color:white'></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6 col-12 d-flex">
+                <div class="dash-count das2">
+                    <div class="dash-counts">
+                        <h4>{{ nb_clients }}</h4>
+                        <h5 style="font-size: 18px;">Nombre total des clients</h5>
+                    </div>
+                    <div class="dash-imgs">
+                        <i class='fas fa-user' style='font-size:48px;color:white'></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <!-- Ajoutez ces blocs de code où vous souhaitez afficher les statistiques -->
+
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="dash-widget dash4" style="background-color: rgb(216, 246, 226);">
+                    <div class="dash-widgetimg">
+                        <span><img src="{% static 'img/icons/chambre.svg' %}" alt="img"></span>
+                    </div>
+                    <div class="dash-widgetcontent">
+                        <h5>{{ nb_total_chambres|intcomma }} CHAMBRES</h5>
+                        <h6>NOMBRE TOTAL DES CHAMBRES</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="dash-widget dash4" style="background-color: rgb(241, 245, 181);">
+                    <div class="dash-widgetimg">
+                        <span><img src="{% static 'img/icons/chambre.svg' %}" alt="img"></span>
+                    </div>
+                    <div class="dash-widgetcontent">
+                        <h5>{{nb_chambres_occupees |intcomma }} CHAMBRES</h5>
+                        <h6>NOMBRE DE CHAMBRE OCCUPE PAR UN CLIENT</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="dash-widget dash1" style="background-color: rgb(224, 224, 224);">
+                    <div class="dash-widgetimg">
+                        <span><img src="{% static 'img/icons/chambre.svg' %}" alt="img"></span>
+                    </div>
+                    <div class="dash-widgetcontent">
+                        <h5>{{ nb_chambres_libres|intcomma }} CHAMBRES</h5>
+                        <h6>NOMBRE DE CHAMBRE LIBRE PRET A SERVIR</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="dash-widget dash1" style="background-color: rgb(253, 214, 214);">
+                    <div class="dash-widgetimg">
+                        <span><img src="{% static 'img/icons/chambre.svg' %}" alt="img"></span>
+                    </div>
+                    <div class="dash-widgetcontent">
+                        <h5>{{ nb_chambres_indisponibles|intcomma }} CHAMBRES</h5>
+                        <h6>NOMBRE DE CHAMBRE INDISPONIBLE</h6>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="dash-widget dash7" style="background-color: rgb(219, 232, 251);">
+                    <div class="dash-widgetimg">
+                        <span><img style="width: 50px;" src="{% static 'img/icons/reservation.svg' %}" alt="img"></span>
+                    </div>
+                    <div class="dash-widgetcontent">
+                        <h5>{{ nb_reservations_jour |intcomma }} RESERVATIONS</h5>
+                        <h6>NOMBRES DE RESERVATIONS DU JOUR</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="dash-widget dash7" style="background-color: rgb(219, 232, 251);">
+                    <div class="dash-widgetimg">
+                        <span><img style="width: 50px;" src="{% static 'img/icons/reservation.svg' %}" alt="img"></span>
+                    </div>
+                    <div class="dash-widgetcontent">
+                        <h5>{{ nb_reservations_semaine |intcomma }} RESERVATIONS</h5>
+                        <h6>NOMBRE RESERVATIONS DE LA SEMAINE</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="dash-widget dash7" style="background-color: rgb(219, 232, 251);">
+                    <div class="dash-widgetimg">
+                        <span><img style="width: 50px;" src="{% static 'img/icons/reservation.svg' %}" alt="img"></span>
+                    </div>
+                    <div class="dash-widgetcontent">
+                        <h5>{{ nb_reservations_mois |intcomma }} RESERVATIONS</h5>
+                        <h6>NOMBRES DE RESERVATIONS DU MOIS</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="dash-widget dash7" style="background-color: rgb(219, 232, 251);">
+                    <div class="dash-widgetimg" style="width: 70px;">
+                        <span><img src="{% static 'img/icons/reservation.svg' %}" alt="img"></span>
+                    </div>
+                    <div class="dash-widgetcontent">
+                        <h5>{{ nb_total_reservations |intcomma }} RESERVATIONS</h5>
+                        <h6>NOMBRES TOTAL DES RESERVATIONS</h6>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+</div>
+
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+
+<script src="{% static 'js/feather.min.js' %}"></script>
+
+<script src="{% static 'js/jquery.slimscroll.min.js' %}"></script>
+
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+<script src="{% static 'plugins/apexchart/apexcharts.min.js' %}"></script>
+<script src="{% static 'plugins/apexchart/chart-data.js' %}"></script>
+
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

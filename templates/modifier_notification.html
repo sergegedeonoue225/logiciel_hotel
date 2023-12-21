@@ -1,0 +1,86 @@
+{% load static %}
+{% include 'header.html' %}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Modifier une notification</h4>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                        <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.nom_notification.id_for_label }}">Objet de la notification</label>
+                                {{ form.nom_notification }}
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.date_notification.id_for_label }}">Date de la notification</label>
+                                {{ form.date_notification }}
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="{{ form.heure_notification.id_for_label }}">Heure de la notification</label>
+                                {{ form.heure_notification }}
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-submit me-2">Enregistrer</button>
+                            <a href="{% url 'index' %}" class="btn btn-cancel">Annuler</a>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</form>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/feather.min.js' %}"></script>
+<script src="{% static 'js/jquery.slimscroll.min.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'plugins/select2/js/select2.min.js' %}"></script>
+<script src="{% static 'js/moment.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
+<script src="{% static 'plugins/sweetalert/sweetalert2.all.min.js' %}"></script>
+<script src="{% static 'plugins/sweetalert/sweetalerts.min.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

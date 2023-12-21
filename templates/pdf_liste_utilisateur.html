@@ -1,0 +1,78 @@
+﻿{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #header {
+            text-align: center;
+        }
+
+        #header img {
+            width: 100px;
+            height: 100px;
+        }
+
+        #title {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #004aad; /* Bleu ciel */
+        
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <img style="width: 200px;" src="data:image/png;base64,{{ logo_base64 }}" alt="Logo">
+    </div>
+    <br><br>
+    <div id="title">
+        <h2>Liste des utilisateurs</h2>
+    </div>
+    <br><br>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th style="color: white; font-size: 14px;">Nom et Prénoms</th>
+                    <th style="color: white;font-size: 14px;">Fonction</th>
+                    <th style="color: white; font-size: 14px;">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for utilisateur in utilisateurs %}
+                <tr>
+                    <td>{{ utilisateur.nom_complet }}</td>
+                    <td>{{ utilisateur.fonction }}</td>
+                    <td>{{ utilisateur.email }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+
+</html>
